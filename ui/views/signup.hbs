@@ -1,0 +1,18 @@
+<div class="container mt-5">
+    <div class="container mt-5">
+        <h1>Signup Page</h1>
+        <form action="/signup" method="post">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <div class="form-group">
+                <input type="email" name="emailId" id="" placeholder="Email Id">
+             </div>
+            <div class="form-group">
+                <input type="password" name="password" id="" placeholder="Password">
+             </div>
+              <div class="form-group">
+                <input type="password" name="confirmPassword" id="" placeholder="Confirm Password">
+             </div>
+            <button class="btn btn-primary">Sign up</button>
+        </form>
+    </div>
+</div>
