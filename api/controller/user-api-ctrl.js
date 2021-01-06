@@ -13,11 +13,12 @@ exports.postLogin = async (req, res, next) => {
 
         if (!user) return res.status(400).send('No user with email id exists!');
 
+       
+
         if (user.password == password) {
            
             let responseBody = {
-                user:user
-
+                user:user,
             }
 
             return res.status(200).send(responseBody);
@@ -62,8 +63,6 @@ exports.postSignup = async (req, res, next) => {
 
 
 exports.postLogout = async(req,res)=>{
-
-   
-   return res.sendStatus(200);
+ return res.sendStatus(200);
 };
 

@@ -1,7 +1,8 @@
 
 const request = require('request');
 const { path } = require('../../app');
-const server = 'http://localhost:8080'
+const server = 'http://localhost:8080';
+const jwt = require('jsonwebtoken');
 
 exports.getLogin = (req, res, next) => {
 
@@ -91,14 +92,18 @@ exports.postLogin = (req,res,next)=>{
             
         console.log();
         if(response.statusCode == 200){
-                   
+             
+            const user = response.body.user;
+            const jwtToken = jwt.sign(user,'secret');
+                
+                req.session.jwtToken = jwtToken;
                 req.session.isLoggedIn = true;
-                req.session.user = response.body.user;
+                req.session.user = user;
                   req.session.save(()=>{
                     res.redirect('/?success');
                   });
                
-                
+                  
             }
 
             else res.redirect('/login?fail=true');

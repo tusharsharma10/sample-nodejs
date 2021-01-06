@@ -9,8 +9,8 @@ const hbs = require('express-handlebars');
 
 const express = require('express');
 const app = express();
-const uiRoute = require('./ui/routes/user-ui');
-const apiRouter = require('./api/routes/user-api');
+const uiRoute = require('./ui/routes/route-ui');
+const apiRouter = require('./api/routes/route-api');
 const cookieParser = require('cookie-parser');
 
 const mongoose = require('mongoose');
@@ -42,6 +42,14 @@ app.use(session
     store: sessionStore
   }));
 
+
+app.use((req,res,next)=>{
+   
+    if(!res.locals.isAuth)
+        res.locals.isAuth = req.session.isLoggedIn;
+
+    next();
+});
 
 app.use('/api',apiRouter);
 app.use(uiRoute);
